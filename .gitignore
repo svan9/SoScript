@@ -1,6 +1,6 @@
-/node_modules
-/src/antlr/.antlr
-src\antlr\sos.g4
+\node_modules
+dist
+src\antlr\.antlr\
 src\antlr\sos.interp
 src\antlr\sos.tokens
 src\antlr\sosLexer.interp
