@@ -1,4 +1,0 @@
-int add_number = (int left, int right) -> {
-  left+right
-};
-
