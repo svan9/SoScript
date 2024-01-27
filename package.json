@@ -1,0 +1,30 @@
+{
+  "name": "soscript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "lint": "eslint . --fix",
+    "antlr": "antlr4ts -visitor -o ./src/antlr/ ./src/antlr/sos.g4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.11.6",
+    "@types/yargs": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "eslint": "^8.56.0"
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
+    "yargs": "^17.7.2"
+  }
+}
