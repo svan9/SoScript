@@ -1,2 +1,7 @@
 /node_modules
-src\antlr\.antlr
+/src/antlr/.antlr
+src\antlr\sos.g4
+src\antlr\sos.interp
+src\antlr\sos.tokens
+src\antlr\sosLexer.interp
+src\antlr\sosLexer.tokens
