@@ -11,6 +11,8 @@ import { StatementContext } from "./sosParser";
 import { Args_rowContext } from "./sosParser";
 import { BlockContext } from "./sosParser";
 import { Function_statementContext } from "./sosParser";
+import { Macros_statementContext } from "./sosParser";
+import { Macros_bodyContext } from "./sosParser";
 import { Return_statementContext } from "./sosParser";
 import { Type_castContext } from "./sosParser";
 import { Operator_statementContext } from "./sosParser";
@@ -18,9 +20,13 @@ import { Variable_defineContext } from "./sosParser";
 import { Rounded_breaketContext } from "./sosParser";
 import { Squared_breaketContext } from "./sosParser";
 import { List_baseContext } from "./sosParser";
+import { Assert_nameContext } from "./sosParser";
+import { Insert_var_valueContext } from "./sosParser";
 import { EverythingContext } from "./sosParser";
 import { Type_indentifyContext } from "./sosParser";
 import { StiContext } from "./sosParser";
+import { CommentsContext } from "./sosParser";
+import { Comment_multilineContext } from "./sosParser";
 
 
 /**
@@ -88,6 +94,20 @@ export interface sosVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitFunction_statement?: (ctx: Function_statementContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `sosParser.macros_statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMacros_statement?: (ctx: Macros_statementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `sosParser.macros_body`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMacros_body?: (ctx: Macros_bodyContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `sosParser.return_statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -137,6 +157,20 @@ export interface sosVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitList_base?: (ctx: List_baseContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `sosParser.assert_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAssert_name?: (ctx: Assert_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `sosParser.insert_var_value`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInsert_var_value?: (ctx: Insert_var_valueContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `sosParser.everything`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -156,5 +190,19 @@ export interface sosVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitSti?: (ctx: StiContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `sosParser.comments`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitComments?: (ctx: CommentsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `sosParser.comment_multiline`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitComment_multiline?: (ctx: Comment_multilineContext) => Result;
 }
 

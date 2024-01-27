@@ -33,4 +33,5 @@ const lexer = new sosLexer_1.sosLexer(antlr.CharStreams.fromString(input));
 const tokenStream = new antlr.CommonTokenStream(lexer);
 const parser = new sosParser_1.sosParser(tokenStream);
 const tree = parser.program();
+// console.log(tree);
 //# sourceMappingURL=index.js.map

@@ -1,8 +1,10 @@
 grammar sos;
 
-FUNCTION_KW : 'function';
-RETURN_KW   : 'return';
-END_OF_EXPR : ';';
+FUNCTION_KW     : 'function';
+RETURN_KW       : 'return';
+END_OF_EXPR     : ';';
+MACROS_KW       : '@macros';
+DEFINE_KW       : '@define';
 
 OPERATOR_SYMBOLS: '=-+*^<>'+;
 ASSERT_NAME: [a-zA-Z_$][0-9a-zA-Z_$]*;
@@ -14,19 +16,33 @@ line: expression END_OF_EXPR+;
 
 variable: variable_define operator_statement?;
 
-expression: statement;
+expression: statement | comments;
 
-statement: 
-  function_statement
+statement
+  : function_statement
+  | macros_statement
 ;
 
-args_row: '(' variable_define ( ',' variable_define NAME )* ')';
+args_row: '(' variable_define ( ',' variable_define assert_name )* ')';
 
 block: 
   '{' (return_statement | line)* '}'
 ;
 
 function_statement: args_row '->' block;
+
+define_statement: 
+  DEFINE_KW assert_name 'as' assert_name
+;
+
+
+macros_statement: 
+  MACROS_KW assert_name macros_body
+;
+
+macros_body: 
+  '{' rounded_breaket '->' block '}'  
+;
 
 return_statement: 
   expression
@@ -36,30 +52,38 @@ type_cast: '(' type_indentify ')' rounded_breaket;
 
 operator_statement: OPERATOR_SYMBOLS statement;
 
-variable_define: type_indentify NAME;
+variable_define: type_indentify assert_name;
 
 rounded_breaket: '(' list_base ')';
 squared_breaket: '[' list_base ']';
 
 list_base: everything (',' everything)*;
 
+assert_name
+  // insert_var_value assert_name
+  : ASSERT_NAME
+  | STRING
+  | CHAR
+;
+
+insert_var_value: 
+  '%' assert_name '%'
+;
+
 everything
   : type_indentify
   | STRING
   | CHAR
   | NUMBER
-  | NAME
+  | ASSERT_NAME
 ;
 
-type_indentify: TYPE sti?;
+type_indentify: assert_name sti?;
 
 sti
   : '&'
   | '~' expression
 ;
-
-NAME: ASSERT_NAME;
-TYPE: ASSERT_NAME;
 
 STRING
   : '"' ('\\"' | ~'"')* '"'
@@ -98,3 +122,15 @@ SPLITED_NUMBER
 ;
 
 WS: [\n\r ] -> skip;
+
+comments: ( comment_multiline | COMMENT_SINGLELINE );
+
+COMMENT_SINGLELINE
+  : '//' ~('\n' | '\r')*
+;
+
+comment_multiline: 
+  ('***') 
+    ~('***')* 
+  ('***')
+;

@@ -24,8 +24,6 @@
     "eslint": "^8.56.0"
   },
   "dependencies": {
-    "antlr4ng": "^2.0.8",
-    "antlr4ng-cli": "^1.0.7",
     "antlr4ts": "^0.5.0-alpha.4",
     "yargs": "^17.7.2"
   }

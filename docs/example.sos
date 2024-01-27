@@ -1,6 +1,6 @@
 @macros some_macros {
   (a, b) -> {
-    %a%_somefunc(b)
+   // %a%_somefunc(b)
   }
 }
 

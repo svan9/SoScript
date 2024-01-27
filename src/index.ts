@@ -15,3 +15,5 @@ const tokenStream = new antlr.CommonTokenStream(lexer);
 const parser = new sosParser(tokenStream);
 
 const tree = parser.program();
+
+// console.log(tree);

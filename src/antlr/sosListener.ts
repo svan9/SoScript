@@ -11,6 +11,8 @@ import { StatementContext } from "./sosParser";
 import { Args_rowContext } from "./sosParser";
 import { BlockContext } from "./sosParser";
 import { Function_statementContext } from "./sosParser";
+import { Macros_statementContext } from "./sosParser";
+import { Macros_bodyContext } from "./sosParser";
 import { Return_statementContext } from "./sosParser";
 import { Type_castContext } from "./sosParser";
 import { Operator_statementContext } from "./sosParser";
@@ -18,9 +20,13 @@ import { Variable_defineContext } from "./sosParser";
 import { Rounded_breaketContext } from "./sosParser";
 import { Squared_breaketContext } from "./sosParser";
 import { List_baseContext } from "./sosParser";
+import { Assert_nameContext } from "./sosParser";
+import { Insert_var_valueContext } from "./sosParser";
 import { EverythingContext } from "./sosParser";
 import { Type_indentifyContext } from "./sosParser";
 import { StiContext } from "./sosParser";
+import { CommentsContext } from "./sosParser";
+import { Comment_multilineContext } from "./sosParser";
 
 
 /**
@@ -117,6 +123,28 @@ export interface sosListener extends ParseTreeListener {
 	exitFunction_statement?: (ctx: Function_statementContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `sosParser.macros_statement`.
+	 * @param ctx the parse tree
+	 */
+	enterMacros_statement?: (ctx: Macros_statementContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.macros_statement`.
+	 * @param ctx the parse tree
+	 */
+	exitMacros_statement?: (ctx: Macros_statementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.macros_body`.
+	 * @param ctx the parse tree
+	 */
+	enterMacros_body?: (ctx: Macros_bodyContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.macros_body`.
+	 * @param ctx the parse tree
+	 */
+	exitMacros_body?: (ctx: Macros_bodyContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `sosParser.return_statement`.
 	 * @param ctx the parse tree
 	 */
@@ -194,6 +222,28 @@ export interface sosListener extends ParseTreeListener {
 	exitList_base?: (ctx: List_baseContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `sosParser.assert_name`.
+	 * @param ctx the parse tree
+	 */
+	enterAssert_name?: (ctx: Assert_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.assert_name`.
+	 * @param ctx the parse tree
+	 */
+	exitAssert_name?: (ctx: Assert_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.insert_var_value`.
+	 * @param ctx the parse tree
+	 */
+	enterInsert_var_value?: (ctx: Insert_var_valueContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.insert_var_value`.
+	 * @param ctx the parse tree
+	 */
+	exitInsert_var_value?: (ctx: Insert_var_valueContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `sosParser.everything`.
 	 * @param ctx the parse tree
 	 */
@@ -225,5 +275,27 @@ export interface sosListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitSti?: (ctx: StiContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.comments`.
+	 * @param ctx the parse tree
+	 */
+	enterComments?: (ctx: CommentsContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.comments`.
+	 * @param ctx the parse tree
+	 */
+	exitComments?: (ctx: CommentsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.comment_multiline`.
+	 * @param ctx the parse tree
+	 */
+	enterComment_multiline?: (ctx: Comment_multilineContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.comment_multiline`.
+	 * @param ctx the parse tree
+	 */
+	exitComment_multiline?: (ctx: Comment_multilineContext) => void;
 }
 
