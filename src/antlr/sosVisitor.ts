@@ -11,6 +11,7 @@ import { StatementContext } from "./sosParser";
 import { Args_rowContext } from "./sosParser";
 import { BlockContext } from "./sosParser";
 import { Function_statementContext } from "./sosParser";
+import { Define_statementContext } from "./sosParser";
 import { Macros_statementContext } from "./sosParser";
 import { Macros_bodyContext } from "./sosParser";
 import { Return_statementContext } from "./sosParser";
@@ -92,6 +93,13 @@ export interface sosVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFunction_statement?: (ctx: Function_statementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `sosParser.define_statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDefine_statement?: (ctx: Define_statementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `sosParser.macros_statement`.

@@ -11,6 +11,7 @@ import { StatementContext } from "./sosParser";
 import { Args_rowContext } from "./sosParser";
 import { BlockContext } from "./sosParser";
 import { Function_statementContext } from "./sosParser";
+import { Define_statementContext } from "./sosParser";
 import { Macros_statementContext } from "./sosParser";
 import { Macros_bodyContext } from "./sosParser";
 import { Return_statementContext } from "./sosParser";
@@ -121,6 +122,17 @@ export interface sosListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunction_statement?: (ctx: Function_statementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.define_statement`.
+	 * @param ctx the parse tree
+	 */
+	enterDefine_statement?: (ctx: Define_statementContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.define_statement`.
+	 * @param ctx the parse tree
+	 */
+	exitDefine_statement?: (ctx: Define_statementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `sosParser.macros_statement`.

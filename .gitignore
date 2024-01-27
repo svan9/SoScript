@@ -1,7 +1,7 @@
 \node_modules
-dist
-src\antlr\.antlr\
-src\antlr\sos.interp
-src\antlr\sos.tokens
-src\antlr\sosLexer.interp
-src\antlr\sosLexer.tokens
+\dist\
+\src\antlr\.antlr\
+\src\antlr\sos.interp
+\src\antlr\sos.tokens
+\src\antlr\sosLexer.interp
+\src\antlr\sosLexer.tokens
