@@ -16,12 +16,12 @@ type i8  = (int 8);
 // singleline comment
 
 int get_age = (Object& linked_object) -> {
-  linked_object->age // returned
+  linked_object.age // returned
 }
 
 @template<ui8 age_>
 ui8 set_age<age_> = (Object& linked_object) -> {
-  linked_object->age = age_;
+  linked_object.age = age_;
 }
 
 Object copy = (Object obj_) -> {

@@ -6,21 +6,30 @@ END_OF_EXPR     : ';';
 MACROS_KW       : '@macros';
 DEFINE_KW       : '@define';
 
-OPERATOR_SYMBOLS: '=-+*^<>'+;
+OPERATOR_SYMBOLS: ('='|'-'|'+'|'*'|'^'|'<'|'>')+;
 ASSERT_NAME: [a-zA-Z_$][0-9a-zA-Z_$]*;
 
 
 program: line* EOF;
 
-line: expression END_OF_EXPR+;
+line: expression | comments;
 
 variable: variable_define operator_statement?;
 
-expression: statement | comments;
+expression
+  : statement END_OF_EXPR+
+  | compiler_instr
+;
+
+compiler_instr
+  : macros_statement
+  | define_statement
+;
 
 statement
   : function_statement
-  | macros_statement
+  | variable
+  | everything
 ;
 
 args_row: '(' variable_define ( ',' variable_define assert_name )* ')';
@@ -44,8 +53,8 @@ macros_body:
   '{' rounded_breaket '->' block '}'  
 ;
 
-return_statement: 
-  expression
+return_statement:
+  statement
 ;
 
 type_cast: '(' type_indentify ')' rounded_breaket;
@@ -60,11 +69,15 @@ squared_breaket: '[' list_base ']';
 list_base: everything (',' everything)*;
 
 assert_name
-  // insert_var_value assert_name
+  : (assert_short_name ('.' assert_short_name)*)
+;
+
+assert_short_name
   : ASSERT_NAME
   | STRING
   | CHAR
 ;
+  
 
 insert_var_value: 
   '%' assert_name '%'
@@ -78,11 +91,11 @@ everything
   | ASSERT_NAME
 ;
 
-type_indentify: assert_name sti?;
+type_indentify: ASSERT_NAME sti?;
 
 sti
   : '&'
-  | '~' expression
+  | '~' (NUMBER | ('(' statement ')'))
 ;
 
 STRING
@@ -123,9 +136,12 @@ SPLITED_NUMBER
 
 WS: [\n\r ] -> skip;
 
-comments: ( comment_multiline | COMMENT_SINGLELINE );
+comments
+  : comment_multiline 
+  | comment_singleline
+;
 
-COMMENT_SINGLELINE
+comment_singleline
   : '//' ~('\n' | '\r')*
 ;
 

@@ -7,6 +7,7 @@ import { ProgramContext } from "./sosParser";
 import { LineContext } from "./sosParser";
 import { VariableContext } from "./sosParser";
 import { ExpressionContext } from "./sosParser";
+import { Compiler_instrContext } from "./sosParser";
 import { StatementContext } from "./sosParser";
 import { Args_rowContext } from "./sosParser";
 import { BlockContext } from "./sosParser";
@@ -22,11 +23,13 @@ import { Rounded_breaketContext } from "./sosParser";
 import { Squared_breaketContext } from "./sosParser";
 import { List_baseContext } from "./sosParser";
 import { Assert_nameContext } from "./sosParser";
+import { Assert_short_nameContext } from "./sosParser";
 import { Insert_var_valueContext } from "./sosParser";
 import { EverythingContext } from "./sosParser";
 import { Type_indentifyContext } from "./sosParser";
 import { StiContext } from "./sosParser";
 import { CommentsContext } from "./sosParser";
+import { Comment_singlelineContext } from "./sosParser";
 import { Comment_multilineContext } from "./sosParser";
 
 
@@ -78,6 +81,17 @@ export interface sosListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitExpression?: (ctx: ExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.compiler_instr`.
+	 * @param ctx the parse tree
+	 */
+	enterCompiler_instr?: (ctx: Compiler_instrContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.compiler_instr`.
+	 * @param ctx the parse tree
+	 */
+	exitCompiler_instr?: (ctx: Compiler_instrContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `sosParser.statement`.
@@ -245,6 +259,17 @@ export interface sosListener extends ParseTreeListener {
 	exitAssert_name?: (ctx: Assert_nameContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `sosParser.assert_short_name`.
+	 * @param ctx the parse tree
+	 */
+	enterAssert_short_name?: (ctx: Assert_short_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.assert_short_name`.
+	 * @param ctx the parse tree
+	 */
+	exitAssert_short_name?: (ctx: Assert_short_nameContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `sosParser.insert_var_value`.
 	 * @param ctx the parse tree
 	 */
@@ -298,6 +323,17 @@ export interface sosListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitComments?: (ctx: CommentsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `sosParser.comment_singleline`.
+	 * @param ctx the parse tree
+	 */
+	enterComment_singleline?: (ctx: Comment_singlelineContext) => void;
+	/**
+	 * Exit a parse tree produced by `sosParser.comment_singleline`.
+	 * @param ctx the parse tree
+	 */
+	exitComment_singleline?: (ctx: Comment_singlelineContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `sosParser.comment_multiline`.
